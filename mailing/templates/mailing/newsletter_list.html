@@ -1,0 +1,43 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+            {% for newsletter in object_list %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">Статус рассылки: {{ newsletter.status }}</p>
+                        <p class="card-text">Сообщение: {{ newsletter.message }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class=btn-group">
+                                <a class="btn btn-primary rounded" href="{% url 'mailing:newsletter_detail' newsletter.pk %}" role="button">Посмотреть</a>
+                                <span style="margin: 0 3px;"></span>
+                                <a class="btn btn-primary rounded" href="{% url 'mailing:base' %}" role="button">Назад</a>
+                                <span style="margin: 0 3px;"></span>
+                                {% if user == newsletter.owner %}
+                                <a class="btn btn-primary rounded" href="{% url 'mailing:newsletter_update' newsletter.pk %}" role="button">Редактировать</a>
+                                <span style="margin: 0 3px;"></span>
+                                <a class="btn btn-danger rounded" href="{% url 'mailing:newsletter_delete' newsletter.pk %}" role="button">Удалить</a>
+                                <span style="margin: 0 3px;"></span>
+                                {% endif %}
+                                {% if perms.mailing.can_edit_is_active_mailing or user == newsletter.owner %}
+                                    {% if newsletter.is_active %}
+                                <a class="btn btn-danger rounded" href="{% url 'mailing:disabling_newsletter' newsletter.pk %}"
+                                   role="button">Деактивировать</a>
+                                    {% else %}
+                                <a class="btn btn btn-success" href="{% url 'mailing:disabling_newsletter' newsletter.pk %}"
+                                   role="button">Активировать</a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

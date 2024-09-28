@@ -1,0 +1,21 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+<div class="col-6">
+    <form class="row" method="post">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-success">
+                    Войти
+                </button>
+                <span style="margin: 0 10px;"></span>
+                <a class="btn btn-danger rounded" href="{% url 'users:new_password' %}" role="button">Забыли пароль?</a>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

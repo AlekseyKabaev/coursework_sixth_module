@@ -1,0 +1,25 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">Статус рассылки: {{ object.status }}</p>
+                        <p class="card-text">Переодичность рассылки: {{ object.frequency }}</p>
+                        <p class="card-text">Дата и время первой отправки рассылки: {{ object.first_time_sending }}</p>
+                        <p class="card-text">Сообщение: {{ newsletter.message }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="{% url 'mailing:newsletter_list' %}" role="button">Назад</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

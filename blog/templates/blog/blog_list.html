@@ -1,0 +1,30 @@
+{% extends 'mailing/base.html' %}
+{% load blog_tags %}
+
+{% block content %}
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for blog in object_list %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="{{ blog.image | media_filter }}">
+                    <div class="card-body">
+                        <p class="card-text">Название блога: {{ blog.title }}</p>
+                        <p class="card-text">Содержание блога: {{ blog.content }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-primary rounded" href="{% url 'blog:blog_detail' blog.pk %}"
+                                   role="button">Посмотреть</a>
+                                <span style="margin: 0 10px;"></span>
+                                <a class="btn btn-primary" href="{% url 'mailing:base' %}" role="button">Назад</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
