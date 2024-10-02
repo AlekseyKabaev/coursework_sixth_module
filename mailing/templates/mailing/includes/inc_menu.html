@@ -8,11 +8,13 @@
                 <h4>Навигация</h4>
                 <ul class="list-unstyled">
                     <li><a href="{% url 'mailing:base' %}" class="text-white">Главная</a></li>
+                    {% if user.is_authenticated %}
                     <li><a href="{% url 'mailing:client_list' %}" class="text-white">Клиент</a></li>
                     <li><a href="{% url 'mailing:newsletter_list' %}" class="text-white">Рассылка</a></li>
+                    <li><a href="{% url 'mailing:sending_list' %}" class="text-white">Попытка рассылки</a></li>
                     <li><a href="{% url 'mailing:message_list' %}" class="text-white">Сообщение</a></li>
                     <li><a href="{% url 'blog:blog_list' %}" class="text-white">Блог</a></li>
-                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'users:profile_edit' %}" class="text-white">Просмотр/редактирование профиля</a></li>
                     <li><a href="{% url 'users:logout' %}" class="text-white">Выход</a></li>
                     {% else %}
                     <li><a href="{% url 'users:login' %}" class="text-white">Вход</a></li>

@@ -12,6 +12,7 @@
                         <p class="card-text">Сообщение: {{ newsletter.message }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class=btn-group">
+                                {% if user.is_authenticated %}
                                 <a class="btn btn-primary rounded" href="{% url 'mailing:newsletter_detail' newsletter.pk %}" role="button">Посмотреть</a>
                                 <span style="margin: 0 3px;"></span>
                                 <a class="btn btn-primary rounded" href="{% url 'mailing:base' %}" role="button">Назад</a>
@@ -22,7 +23,8 @@
                                 <a class="btn btn-danger rounded" href="{% url 'mailing:newsletter_delete' newsletter.pk %}" role="button">Удалить</a>
                                 <span style="margin: 0 3px;"></span>
                                 {% endif %}
-                                {% if perms.mailing.can_edit_is_active_mailing or user == newsletter.owner %}
+                                {% endif %}
+                                {% if perms.mailing.can_edit_is_active_mailing %}
                                     {% if newsletter.is_active %}
                                 <a class="btn btn-danger rounded" href="{% url 'mailing:disabling_newsletter' newsletter.pk %}"
                                    role="button">Деактивировать</a>

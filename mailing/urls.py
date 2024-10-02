@@ -5,7 +5,7 @@ from mailing.apps import MailingConfig
 from mailing.views import NewsLetterCreateView, NewsLetterListView, NewsLetterDetailView, NewsLetterUpdateView, \
     NewsLetterDeleteView, ClientCreateView, ClientListView, ClientDetailView, ClientUpdateView, ClientDeleteView, \
     MessageCreateView, MessageListView, MessageDetailView, MessageUpdateView, MessageDeleteView, HomePageView, \
-    disabling_client, disabling_newsletter
+    disabling_client, disabling_newsletter, SendingAttemptListView
 
 app_name = MailingConfig.name
 
@@ -31,5 +31,7 @@ urlpatterns = [
 
     path("activity/<int:pk>/client/", disabling_client, name="disabling_client"),
     path("activity/<int:pk>/newsletter/", disabling_newsletter, name="disabling_newsletter"),
+
+    path('sendingattempt_list/', SendingAttemptListView.as_view(), name='sending_list'),
 
 ]

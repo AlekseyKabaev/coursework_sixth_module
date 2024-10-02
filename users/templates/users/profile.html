@@ -1,0 +1,18 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+<div class="col-6">
+    <form class="row" method="post">
+        <div class="col-6">
+            <div class="card">
+                <h2>Редактирование профиля</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <a class="btn btn-primary rounded" href="{% url 'mailing:base' %}" role="button">Сохранить изменения</a>
+                </form>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

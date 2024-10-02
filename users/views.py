@@ -1,7 +1,7 @@
 import secrets
 
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.core.mail import send_mail
 from django.urls import reverse
@@ -9,9 +9,10 @@ from django.contrib.auth.views import PasswordResetView
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.crypto import get_random_string
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from users.models import User
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, UserProfileForm
 
 from config.settings import EMAIL_HOST_USER
 
@@ -65,3 +66,13 @@ class NewPasswordView(PasswordResetView):
             recipient_list=[user.email]
         )
         return redirect('users:login')
+
+
+class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserProfileForm
+    template_name = 'users/profile.html'
+    success_url = reverse_lazy('mailing:base')
+
+    def get_object(self, queryset=None):
+        return self.request.user

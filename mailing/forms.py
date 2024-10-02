@@ -32,3 +32,15 @@ class MessageForm(StyleFormMixin, ModelForm):
         model = Message
         fields = '__all__'
         exclude = ('owner',)
+
+
+class NewsLetterManagerForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = NewsLetter
+        fields = '__all__'
+
+
+class ClientManagerForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Client
+        fields = '__all__'
